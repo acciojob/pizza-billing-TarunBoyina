@@ -15,6 +15,7 @@ public class Pizza {
     boolean isPaperBagAdded;
     boolean isBillGenerator;
 
+  boolean isBasePrice;
 
     public Pizza(Boolean isVeg) {
         if (isVeg) {
@@ -36,6 +37,12 @@ public class Pizza {
         return totalprice;
     }
 
+    public void addBasePrice() {
+        if(isBasePrice == false){
+            totalprice =totalprice+basePrice;
+            isBasePrice = true;
+        }
+    }
     public void addExtraCheese() {
         if (isCheeseAdded == false) {
             totalprice = totalprice + cheesePrice;
@@ -71,7 +78,9 @@ public class Pizza {
             if (isPaperBagAdded == true) {
                 bill = bill + "Paperbag Added: " + paperBag + "\n";
             }
+totalprice =totalprice+basePrice;
             bill = bill + "Total Price: " + totalprice+ "\n";
+
 
             isBillGenerator = true;
 
