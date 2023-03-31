@@ -2,33 +2,81 @@ package com.driver;
 
 public class Pizza {
 
-    private int price;
-    private Boolean isVeg;
-    private String bill;
 
-    public Pizza(Boolean isVeg){
-        this.isVeg = isVeg;
+    //  private Boolean isVeg;
+    public String bill;
+    public int paperBag;
+    public int cheesePrice;
+    public int basePrice;
+    public int totalprice;
+    public int toppingPrice;
+    boolean isCheeseAdded;
+    boolean isToppingAdded;
+    boolean isPaperBagAdded;
+    boolean isBillGenerator;
+
+
+    public Pizza(Boolean isVeg) {
+        if (isVeg) {
+            basePrice = 300;
+            toppingPrice = 70;
+        } else {
+            basePrice = 400;
+            toppingPrice = 120;
+        }
+        paperBag = 20;
+        cheesePrice = 80;
+        isCheeseAdded = false;
+        isPaperBagAdded = false;
+        isToppingAdded = false;
+        bill = "Base Price Of The Pizza: " + basePrice + "\n";
+    }
+
+    public int getPrice() {
+        return totalprice;
+    }
+
+    public void addExtraCheese() {
+        if (isCheeseAdded == false) {
+            totalprice = totalprice + cheesePrice;
+            isCheeseAdded = true;
+        }
+    }
+
+    public void addExtraToppings() {
+        if (isToppingAdded == false) {
+           totalprice = totalprice + toppingPrice;
+            isToppingAdded = true;
+        }
+    }
+
+    public void addTakeaway() {
         // your code goes here
+        if (isPaperBagAdded == false) {
+            totalprice = totalprice + paperBag;
+            isPaperBagAdded = true;
+        }
     }
 
-    public int getPrice(){
-        return this.price;
-    }
+    public String getBill() {
+        if (isBillGenerator == false) {
 
-    public void addExtraCheese(){
-        // your code goes here
-    }
 
-    public void addExtraToppings(){
-        // your code goes here
-    }
+            if (isCheeseAdded == true) {
+                bill = bill + "Extra Cheese Price: " + cheesePrice + "\n";
+            }
+            if (isToppingAdded == true) {
+                bill = bill + "Extra Toppings Added: " + toppingPrice + "\n";
+            }
+            if (isPaperBagAdded == true) {
+                bill = bill + "Paperbag Added: " + paperBag + "\n";
+            }
+            bill = bill + "Total Price: " + totalprice+ "\n";
 
-    public void addTakeaway(){
-        // your code goes here
-    }
+            isBillGenerator = true;
 
-    public String getBill(){
-        // your code goes here
-        return this.bill;
+        }
+            return bill;
+        }
+
     }
-}
