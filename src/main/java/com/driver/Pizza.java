@@ -2,90 +2,92 @@ package com.driver;
 
 public class Pizza {
 
+    private int price;
+    private Boolean isVeg;
+    private String bill;
 
-    //  private Boolean isVeg;
-    public String bill;
-    public int paperBag;
-    public int cheesePrice;
-    public int basePrice;
-    public int totalprice;
-    public int toppingPrice;
-    boolean isCheeseAdded;
-    boolean isToppingAdded;
-    boolean isPaperBagAdded;
-    boolean isBillGenerator;
+    private Boolean extraCheese = false;
+    private Boolean extraToppings = false;
+    private Boolean paperBag = false;
 
-  boolean isBasePrice;
+    public Pizza(Boolean isVeg){
+        this.isVeg = isVeg;
 
-    public Pizza(Boolean isVeg) {
-        if (isVeg) {
-            basePrice = 300;
-            toppingPrice = 70;
-        } else {
-            basePrice = 400;
-            toppingPrice = 120;
-        }
-        paperBag = 20;
-        cheesePrice = 80;
-        isCheeseAdded = false;
-        isPaperBagAdded = false;
-        isToppingAdded = false;
-        bill = "Base Price Of The Pizza: " + basePrice + "\n";
-    }
-
-    public int getPrice() {
-        return totalprice;
-    }
-
-    public void addBasePrice() {
-        if(isBasePrice == false){
-            totalprice =totalprice+basePrice;
-            isBasePrice = true;
-        }
-    }
-    public void addExtraCheese() {
-        if (isCheeseAdded == false) {
-            totalprice = totalprice + cheesePrice;
-            isCheeseAdded = true;
-        }
-    }
-
-    public void addExtraToppings() {
-        if (isToppingAdded == false) {
-           totalprice = totalprice + toppingPrice;
-            isToppingAdded = true;
-        }
-    }
-
-    public void addTakeaway() {
         // your code goes here
-        if (isPaperBagAdded == false) {
-            totalprice = totalprice + paperBag;
-            isPaperBagAdded = true;
-        }
-    }
-
-    public String getBill() {
-        if (isBillGenerator == false) {
-
-
-            if (isCheeseAdded == true) {
-                bill = bill + "Extra Cheese Price: " + cheesePrice + "\n";
-            }
-            if (isToppingAdded == true) {
-                bill = bill + "Extra Toppings Added: " + toppingPrice + "\n";
-            }
-            if (isPaperBagAdded == true) {
-                bill = bill + "Paperbag Added: " + paperBag + "\n";
-            }
-totalprice =totalprice+basePrice;
-            bill = bill + "Total Price: " + totalprice+ "\n";
-
-
-            isBillGenerator = true;
-
-        }
-            return bill;
+        if(isVeg == true){
+            this.price += 300;
+        }else{
+            this.price += 400;
         }
 
     }
+
+    public int getPrice(){
+
+        return this.price;
+
+    }
+
+    public void addExtraCheese(){
+        // your code goes here
+        if(this.extraCheese == true){
+            return;
+        }
+        price = price + 80;
+        this.extraCheese = true;
+    }
+
+    public void addExtraToppings(){
+        // your code goes here
+        if(extraToppings == true){
+            return;
+        }
+        if(isVeg == true){
+            price = price + 70;
+        }else{
+            price = price + 120;
+        }
+        extraToppings = true;
+
+
+    }
+
+    public void addTakeaway(){
+        // your code goes here
+        if(paperBag == true){
+            return;
+        }
+        price = price + 20;
+        paperBag = true;
+    }
+
+    public String getBill(){
+        // your code goes here
+        if(isVeg == true){
+            bill = "Base Price Of The Pizza: 300\n";
+        }else{
+            bill = "Base Price Of The Pizza: 400\n";
+        }
+
+        if(extraCheese == true){
+            bill = bill + "Extra Cheese Added: 80\n";
+        }
+
+        if(extraToppings == true){
+            if(isVeg == true){
+                bill = bill + "Extra Toppings Added: 70\n";
+            }else{
+                bill = bill + "Extra Toppings Added: 120\n";
+            }
+        }
+
+        if(paperBag == true){
+            bill = bill + "Paperbag Added: 20\n";
+        }
+
+        String totalPrice = Integer.toString(price);
+
+        bill = bill + "Total Price: " + totalPrice + "\n";
+        return this.bill;
+    }
+}
